@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- WinExe (not Exe): no console window pops up when the scheduled task
+         launches this at logon or when double-clicked. All output already
+         goes to logs\jonsbo-monitor.log (see FileLog.cs) and to
+         sensor-dump.txt/bench-result.txt for the diagnostic flags, all
+         addressed via AppContext.BaseDirectory rather than cwd, so nothing
+         is lost — the Console.WriteLine calls that remain (FileLog's
+         console mirror, the dump-sensors/bench-seconds CLI flags' stdout) simply
+         become no-ops with WinExe and no attached console, which is fine:
+         they still work when run manually from a terminal. -->
+    <OutputType>WinExe</OutputType>
+    <!-- net8.0-windows (not plain net8.0): this app is Windows-only anyway
+         (HID device access, elevation manifest, win-x64 RID); the -windows
+         TFM tags the assembly SupportedOSPlatform("windows") so the CA1416
+         warnings from the WMI RAM-clock fallback resolve cleanly instead of
+         needing per-call-site suppression. -->
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>JonsboMonitor</RootNamespace>
+    <AssemblyName>JonsboMonitor</AssemblyName>
+
+    <!-- Self-contained single-file publish: no .NET runtime dependency on
+         the target machine, one exe to install/uninstall. -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <InvariantGlobalization>true</InvariantGlobalization>
+
+    <!-- Trimming is intentionally OFF: LibreHardwareMonitorLib uses WMI/
+         reflection-heavy sensor discovery that trims unpredictably. The
+         RAM budget target (<30MB working set) is dominated by not running
+         Electron/Chromium at all, not by trimming this exe. -->
+    <PublishTrimmed>false</PublishTrimmed>
+
+    <!-- Requires elevation: LibreHardwareMonitorLib reads MSR/SMBus/Super
+         I/O registers that are only accessible to an administrator. -->
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HidSharp" Version="2.1.0" />
+    <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.4" />
+    <!-- WMI fallback for RAM clock speed when LHM has no Super I/O sensor
+         for it (see HardwareSensors.GetRamClockFromWmi). Pinned to 9.0.0 to
+         match the version LibreHardwareMonitorLib already pulls in
+         transitively — a lower explicit version here triggers NU1605. -->
+    <PackageReference Include="System.Management" Version="9.0.0" />
+  </ItemGroup>
+
+</Project>

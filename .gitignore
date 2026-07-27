@@ -1,0 +1,25 @@
+# Vendor's decompiled/extracted Electron app — proprietary source, never
+# committed. It's been moved to ..\jonsbo-alt-extracted-reference (outside
+# this repo) for local reference; this line stays as a backstop in case it
+# or anything like it ever reappears under this root.
+extracted/
+
+# Python venv for prototype/test_frame.py
+.venv/
+
+# .NET build output
+bin/
+obj/
+publish/
+publish-*/
+
+# Local NuGet package cache (nuget.config points restore here)
+packages/
+
+# Logs and diagnostic/measurement output — all machine- and run-specific
+*.log
+logs/
+measure*.csv
+soak.csv
+sensor-dump.txt
+bench-result.txt

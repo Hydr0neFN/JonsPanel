@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
+    <security>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          LibreHardwareMonitorLib needs administrator rights to read
+          hardware sensors (MSR / SMBus / Super I/O access on Windows).
+          The scheduled task created by install.ps1 runs with
+          -RunLevel Highest to satisfy this.
+        -->
+        <requestedExecutionLevel level="requireAdministrator" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+</assembly>
