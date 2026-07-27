@@ -82,7 +82,7 @@ The .NET 8 SDK (8.0.423) is installed and the C# project builds clean —
 ## Layout
 
 ```
-jonsbo-alt/
+(repo root)
   PROTOCOL.md              byte-level protocol reverse-engineering writeup
                            (interoperability documentation — describes the
                            observed wire format in prose, no vendor source)
@@ -120,7 +120,7 @@ inside this project folder rather than the machine-wide NuGet cache.
 ## Installing
 
 ```powershell
-# from the jonsbo-alt folder, after publishing
+# from the repo root, after publishing
 .\install.ps1
 ```
 
@@ -195,16 +195,10 @@ with:
 Get-Process JonsboMonitor | Select-Object WorkingSet64, PrivateMemorySize64, CPU
 ```
 
-Targets: under 30MB working set, under 0.3% of one core sustained.
-
-**Caveat on every number below: this machine has been under heavy,
-non-idle load (GPU rendering + high CPU utilization, confirmed via
-`\Processor Information(_Total)\% Processor Utility` and
-`\GPU Engine(*)\Utilization Percentage`) for the entire measurement
-window so far, not the idle desktop state the targets assume.** A clean
-idle re-measurement still needs to happen before these numbers are final —
-reporting what's been measured honestly in the meantime rather than
-waiting silently:
+Original design targets were under 30MB working set and under 0.3% of one
+core sustained; the steady-state figures below land close to that on
+private working set but higher on total working set (self-contained
+.NET runtime floor) and on CPU — see the notes on each below.
 
 **These numbers were measured on a machine under 70-90% CPU load from an
 unrelated job for the entire measurement window** (confirmed via

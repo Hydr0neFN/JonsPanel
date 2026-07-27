@@ -88,7 +88,7 @@ if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
 
 Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger `
     -Principal $principal -Settings $settings `
-    -Description "Lightweight native replacement for JONSBO PC Monitor (see jonsbo-alt/README.md). Drives the case display over USB HID directly; no Electron." `
+    -Description "Lightweight native replacement for JONSBO PC Monitor (see README.md). Drives the case display over USB HID directly; no Electron." `
     | Out-Null
 
 Write-Host "Installed scheduled task '$taskName'."
