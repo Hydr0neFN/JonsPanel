@@ -1,3 +1,5 @@
+**English** · [繁體中文](README.zh-TW.md)
+
 > **Not affiliated with JONSBO.** This is an independent, unofficial
 > reimplementation, not a JONSBO product, and is neither endorsed by nor
 > connected to JONSBO or its subsidiaries. "JONSBO" is used descriptively
