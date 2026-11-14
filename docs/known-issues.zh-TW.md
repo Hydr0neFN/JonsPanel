@@ -3,7 +3,7 @@
 [回到 README](../README.zh-TW.md)
 
 - `HardwareSensors.cs` 的 CPU 風扇與機殼風扇分配，是「Super I/O 回報的前兩個
-  風扇感測器」這種盡力而為的經驗法則 —— Super I/O 晶片不會可靠標示哪個實體插座
+  風扇感測器」這種憑經驗猜的規則 —— Super I/O 晶片不會可靠標示哪個實體插座
   對應哪個。如果在這張板子上順序相反，就在 `HardwareSensors.Read()` 裡把兩個
   索引對調（搜尋 `fanRpms[0]` / `fanRpms[1]`），或用
   `JonsboMonitor.exe --dump-sensors` 把實際感測器名稱倒出來（見下文）再照名稱
@@ -23,7 +23,7 @@
   （這組 DDR5-6000 EXPO 是 6000）；真正的時脈只有一半（3000MHz，DDR 是
   雙倍資料率）。我們刻意報 MT/s：Windows 工作管理員和多數消費級監控工具就是用
   這個數字標成 DDR 記憶體的「MHz」，這樣跟使用者旁邊其他工具看到的才一致 ——
-  跟 `FrameBuilder.cs` 裡華氏 `TempEnd` 那個怪癖是同樣的錯誤相容考量。如果在
+  跟 `FrameBuilder.cs` 裡華氏 `TempEnd` 那個怪癖也是同一種「連怪癖都照著相容」的考量。如果在
   某張板子上還是讀到 0，就是 WMI 本身沒回報任何已安裝記憶體的設定時脈。
 - `JonsboMonitor.exe --dump-sensors` 會把 LHM 看得到的每個感測器（硬體 / 名稱 /
   類型 / 數值）印到 stdout 和 exe 旁的 `sensor-dump.txt`，然後結束 —— 上面那些

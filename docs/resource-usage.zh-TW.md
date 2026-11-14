@@ -28,7 +28,7 @@ Get-Process JonsboMonitor | Select-Object WorkingSet64, PrivateMemorySize64, CPU
 - **Working set，穩態：** 長時間 soak（程序放著不動，每 60 秒取樣一次）從一開始
   約 56MB，大約 9 分鐘後爬到高原，之後整段都持平：**total working set 約 65MB /
   private working set 約 29.5MB**，沒有再長。這證明是啟動時一次性爬升後進入
-  穩態，並沒有記憶體流失。**Private working set**（不被共用之獨立式 .NET runtime
+  穩態，並沒有記憶體洩漏。**Private working set**（不被共用之獨立式 .NET runtime
   分頁墊高的部分，也是跟原版比更公平的數字）才是對 <30MB 目標真正有意義的；
   total WS 含了獨立式 .NET runtime 自己的共用分頁，單檔獨立式發行不管應用程式
   層怎麼修剪，都壓不到某個底線以下。依賴框架的發行（改用機器上已裝的 .NET

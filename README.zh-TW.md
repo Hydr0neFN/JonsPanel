@@ -8,7 +8,7 @@
 > 內容不含任何 JONSBO 原始碼、二進位檔、韌體或資產。
 >
 > 只針對 [測試硬體](#測試硬體) 列出的那一組硬體驗證過。換成其他面板，行為未知，
-> 也沒測過 —— 完整的不提供保固聲明請看 [LICENSE](LICENSE)。
+> 也沒測過 —— 完整的免責（不提供保固）聲明請看 [LICENSE](LICENSE)。
 >
 > **權利持有人：** 若您認為這裡有任何內容侵犯您的權利，請看
 > [CONTACT.md](CONTACT.md)，我們會儘快處理。
@@ -39,7 +39,7 @@ Electron 應用程式。傳輸協定相同，CPU 與記憶體用量低很多；�
 - **作業系統：** Windows 11, build 26200
 
 清單以外的硬體都**沒測過**。感測器名稱（Super I/O 的 Vcore/風扇標籤、GPU 廠商
-感測器名稱）是 `HardwareSensors.cs` 用盡力而為的名稱比對解析出來的，會因主機板
+感測器名稱）是 `HardwareSensors.cs` 靠名稱比對盡量找出來的，會因主機板
 廠商與 Super I/O 晶片而不同。換一張板子時，請跑
 `JonsboMonitor.exe --dump-sensors`，再把對應的 `BestOf(...)` 指到實際的感測器
 名稱。詳見 [限制與待辦](#限制與待辦)。
@@ -93,7 +93,7 @@ framebuffer/影像管線，另一端沒有任何東西會用到它。
 
 需要 **.NET 8 SDK**（只有 runtime 不夠）；這台機器裝的是 8.0.423，路徑
 `C:\Program Files\dotnet\sdk`（用 winget 裝的，`Microsoft.DotNet.SDK.8`）。C#
-專案建置乾淨：`dotnet build -c Release`，0 個警告、0 個錯誤。
+專案建置沒問題：`dotnet build -c Release`，0 個警告、0 個錯誤。
 
 ```powershell
 cd src\JonsboMonitor
